@@ -259,28 +259,6 @@ namespace Neo.UI
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-
-            /*
-                Load wallet: must run 'create new wallet' once for this to work
-             */
-            UserWallet wallet;
-            string walletPath = "C:\\path\\to\\walet.db3";
-            string walletPass = "password";
-            try
-            {
-                wallet = UserWallet.Open(walletPath, walletPass);
-            } 
-            catch (CryptographicException)
-            {
-                MessageBox.Show(Strings.PasswordIncorrect);
-                return;
-            }
-            
-            ChangeWallet(wallet);
-            Settings.Default.LastWalletPath = walletPath;
-            Settings.Default.Save();
-            
-
             Task.Run(() =>
             {
                 const string acc_path = "chain.acc";
