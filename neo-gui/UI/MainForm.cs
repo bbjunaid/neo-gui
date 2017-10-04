@@ -1039,48 +1039,116 @@ namespace Neo.UI
         }
 
         private void executeToolStripMenuItem_Click(object sender, EventArgs e)
+{
+    string str;
+    string str2;
+    Transaction transaction;
+    using (ExecuteDialog dialog = new ExecuteDialog())
+    {
+        if (dialog.ShowDialog() != DialogResult.OK)
         {
-            string scriptHash, command;
-            using (ExecuteDialog dialog = new ExecuteDialog())
-            {
-                if (dialog.ShowDialog() != DialogResult.OK) return;
-                dialog.GetCommand(out scriptHash, out command);
-                if (scriptHash == null)
-                {
-                    MessageBox.Show(Strings.ChooseScriptHash);
-                    return;
-                }
-                if (command == null)
-                {
-                    MessageBox.Show(Strings.ChooseCommand);
-                    return;
-                }
-            }
-
-            Transaction tx;
-            switch (command)
-            {
-                case "mintTokens":
-                    using (MintTokensDialog dialog = new MintTokensDialog(scriptHash))
-                    {
-                        if (dialog.ShowDialog() != DialogResult.OK) return;
-                        tx = dialog.GetTransaction();
-                    }
-                    break;
-                default:
-                    tx = null;
-                    break;
-            }
-            if (tx is InvocationTransaction itx)
-            {
-                using (InvokeContractDialog dialog = new InvokeContractDialog(itx))
-                {
-                    if (dialog.ShowDialog() != DialogResult.OK) return;
-                    tx = dialog.GetTransaction();
-                }
-            }
-            Helper.SignAndShowInformation(tx);
+            return;
         }
+        dialog.GetCommand(out str, out str2);
+        if (str == null)
+        {
+            MessageBox.Show(Strings.ChooseScriptHash);
+            return;
+        }
+        if (str2 == null)
+        {
+            MessageBox.Show(Strings.ChooseCommand);
+            return;
+        }
+    }
+    if (str2 == "mintTokens")
+    {
+        using (MintTokensDialog dialog2 = new MintTokensDialog(str))
+        {
+            if (dialog2.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+            transaction = dialog2.GetTransaction();
+        }
+    }
+    else
+    {
+        transaction = null;
+    }
+    InvocationTransaction tx = transaction as InvocationTransaction;
+    if (tx > null)
+    {
+        using (InvokeContractDialog dialog3 = new InvokeContractDialog(tx))
+        {
+            if (dialog3.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+            transaction = dialog3.GetTransaction();
+        }
+    }
+    Helper.SignAndShowInformation(transaction);
+}
+
+ 
+
+ 
+  private void executeToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        string str;
+        string str2;
+        Transaction transaction;
+        using (ExecuteDialog dialog = new ExecuteDialog())
+        {
+            if (dialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+            dialog.GetCommand(out str, out str2);
+            if (str == null)
+            {
+                MessageBox.Show(Strings.ChooseScriptHash);
+                return;
+            }
+            if (str2 == null)
+            {
+                MessageBox.Show(Strings.ChooseCommand);
+                return;
+            }
+        }
+        if (str2 == "mintTokens")
+        {
+            using (MintTokensDialog dialog2 = new MintTokensDialog(str))
+            {
+                if (dialog2.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+                transaction = dialog2.GetTransaction();
+            }
+        }
+        else
+        {
+            transaction = null;
+        }
+        InvocationTransaction tx = transaction as InvocationTransaction;
+        if (tx > null)
+        {
+            using (InvokeContractDialog dialog3 = new InvokeContractDialog(tx))
+            {
+                if (dialog3.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+                transaction = dialog3.GetTransaction();
+            }
+        }
+        Helper.SignAndShowInformation(transaction);
+    }
+
+
+
 
     }
 }
