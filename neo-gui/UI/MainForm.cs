@@ -1094,59 +1094,7 @@ namespace Neo.UI
  
 
  
-  private void executeToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-        string str;
-        string str2;
-        Transaction transaction;
-        using (ExecuteDialog dialog = new ExecuteDialog())
-        {
-            if (dialog.ShowDialog() != DialogResult.OK)
-            {
-                return;
-            }
-            dialog.GetCommand(out str, out str2);
-            if (str == null)
-            {
-                MessageBox.Show(Strings.ChooseScriptHash);
-                return;
-            }
-            if (str2 == null)
-            {
-                MessageBox.Show(Strings.ChooseCommand);
-                return;
-            }
-        }
-        if (str2 == "mintTokens")
-        {
-            using (MintTokensDialog dialog2 = new MintTokensDialog(str))
-            {
-                if (dialog2.ShowDialog() != DialogResult.OK)
-                {
-                    return;
-                }
-                transaction = dialog2.GetTransaction();
-            }
-        }
-        else
-        {
-            transaction = null;
-        }
-        InvocationTransaction tx = transaction as InvocationTransaction;
-        if (tx > null)
-        {
-            using (InvokeContractDialog dialog3 = new InvokeContractDialog(tx))
-            {
-                if (dialog3.ShowDialog() != DialogResult.OK)
-                {
-                    return;
-                }
-                transaction = dialog3.GetTransaction();
-            }
-        }
-        Helper.SignAndShowInformation(transaction);
-    }
-
+  
 
 
 
