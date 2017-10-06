@@ -12,3 +12,9 @@ To build and run locally, you need to clone and build https://github.com/neo-pro
 then copy `libleveldb.dll` to the working directory (i.e. /bin/Debug, /bin/Release)
 
 Note: When building, the project file settings must be changed from static library (lib) to dynamic linked library (dll).
+
+# Testnet:
+https://neoscan-testnet.io/
+
+# Mainnet:
+https://neotracker.io/
