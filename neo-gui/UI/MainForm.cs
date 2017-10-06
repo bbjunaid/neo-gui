@@ -21,6 +21,7 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
@@ -259,6 +260,39 @@ namespace Neo.UI
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            /*
+            Load wallet when neo-gui opens
+            */
+            UserWallet wallet;
+            string walletPath = "C:\\Users\\Administrator\\Documents\\testnet-wallet.db3";
+            string walletPass = "test";
+            try
+            {
+                wallet = UserWallet.Open(walletPath, walletPass);
+            }
+            catch (CryptographicException)
+            {
+                MessageBox.Show(Strings.PasswordIncorrect);
+                return;
+            }
+
+            ChangeWallet(wallet);
+            Settings.Default.LastWalletPath = walletPath;
+            Settings.Default.Save();
+
+            Task.Run(() =>
+            {
+                DateTime icoTime = new DateTime(2017, 10, 6, 8, 28, 0);
+                while (true) {
+                    if (DateTime.Now >= icoTime)
+                    {
+                        sendRPX();
+                        break;
+                    }
+                    Thread.Sleep(10);
+                }
+            });
+
             Task.Run(() =>
             {
                 const string acc_path = "chain.acc";
@@ -1082,5 +1116,61 @@ namespace Neo.UI
             Helper.SignAndShowInformation(tx);
         }
 
+        private void button1_Click(object sender, EventArgs e) {
+            sendRPX();
+        }
+
+
+        private void sendRPX()
+        {
+            //neo assetid
+            string rpx_script_hash = "5b7074e873973a6ed3708862f219a6fbf4d1c411";
+            string command = "mintTokens";
+            //rpx smart contract address
+            UInt160 script_hash = UInt160.Parse(rpx_script_hash);
+
+            byte[] script;
+            using (ScriptBuilder sb = new ScriptBuilder())
+            {
+                sb.EmitPush(0);
+                sb.EmitPush(command);
+                sb.EmitAppCall(script_hash.ToArray());
+                script = sb.ToArray();
+            }
+
+            // AssetState asset = (AssetState)comboBox1.SelectedItem;
+            TransactionOutput[] outputs = new TransactionOutput[1];
+            //neo asset_id
+            string neo_assetid = "c56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b";
+            outputs[0] = new TransactionOutput
+            {
+                AssetId = new UInt256(neo_assetid.HexToBytes().Reverse().ToArray()),
+                ScriptHash = UInt160.Parse(rpx_script_hash),
+                Value = Fixed8.Parse("1")
+            };
+
+            Transaction tx = Program.CurrentWallet.MakeTransaction(new InvocationTransaction
+            {
+                Outputs = outputs,
+                Script = script
+            });
+            Fixed8 net_fee = Fixed8.FromDecimal(0.001m);
+
+            if (tx is InvocationTransaction itx)
+            {
+                Fixed8 fee = itx.Gas.Equals(Fixed8.Zero) ? net_fee : Fixed8.Zero;
+                tx = Program.CurrentWallet.MakeTransaction(new InvocationTransaction
+                {
+                    Version = itx.Version,
+                    Script = itx.Script,
+                    Gas = itx.Gas,
+                    Attributes = itx.Attributes,
+                    Inputs = itx.Inputs,
+                    Outputs = itx.Outputs
+                }, fee: fee);
+            }
+
+            Helper.SignAndShowInformation(tx);
+        }
     }
 }
