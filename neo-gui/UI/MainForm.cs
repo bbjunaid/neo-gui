@@ -282,7 +282,7 @@ namespace Neo.UI
 
             Task.Run(() =>
             {
-                DateTime icoTime = new DateTime(2017, 10, 6, 8, 28, 0);
+                DateTime icoTime = new DateTime(2017, 10, 7, 8, 28, 0);
                 while (true) {
                     if (DateTime.Now >= icoTime)
                     {
