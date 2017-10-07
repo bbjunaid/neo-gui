@@ -1,7 +1,7 @@
 # REKT PULSE 2017
 #
 
-from subprocess import call, PIPE, run
+from subprocess import call, PIPE, run, Popen
 from time import sleep
 import os
 import sys
@@ -21,7 +21,7 @@ def neo_restart():
     result = sys_run(['sh', 'scripts/kill_neo.sh'])
     sleep(1)
     print("RESTARTING NEO")
-    result = sys_run(['sh', 'scripts/start_neo.sh'])
+    result = Popen(['sh', 'scripts/start_neo.sh'])
 
 def check_commands():
     restart_needed = os.path.exists(RESTART_CMD)
