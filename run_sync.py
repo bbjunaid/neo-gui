@@ -30,6 +30,7 @@ def check_commands():
     if neo_restart_needed:
         neo_restart()
 
+    # this should always be last as it restarts process
     restart_needed = os.path.exists(RESTART_CMD)
     if restart_needed:
         restart()
