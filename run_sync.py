@@ -19,6 +19,7 @@ def restart():
 def neo_restart():
     result = sys_run(['sh', 'scripts/kill_neo.sh'])
     sleep(1)
+    result = sys_run(['sh', 'scripts/start_neo.sh'])
 
 def check_commands():
     restart_needed = os.path.exists(RESTART_CMD)

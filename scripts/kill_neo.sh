@@ -1,3 +1,3 @@
 #!/bin/sh
 
-ps -W | grep "neo-gui" | awk '{print $1}' | xargs kill -9
+ps -W | grep "neo-gui" | awk '{print $1}' | xargs kill -f
