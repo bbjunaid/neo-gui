@@ -18,3 +18,14 @@ https://neoscan-testnet.io/
 
 # Mainnet:
 https://neotracker.io/
+
+
+Syncer
+=====
+
+Install:
+- cygwin
+- cygwin git, wget, curl, python
+
+
+- `python run_sync.py`
