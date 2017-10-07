@@ -264,25 +264,23 @@ namespace Neo.UI
             Load wallet when neo-gui opens
             */
             UserWallet wallet;
-            string walletPath = "C:\\Users\\Administrator\\Documents\\testnet-wallet.db3";
+            string walletPath = "C:\\wallet.db3";
             string walletPass = "test";
             try
             {
                 wallet = UserWallet.Open(walletPath, walletPass);
+                ChangeWallet(wallet);
+                Settings.Default.LastWalletPath = walletPath;
+                Settings.Default.Save();
             }
-            catch (CryptographicException)
+            catch (Exception)
             {
                 MessageBox.Show(Strings.PasswordIncorrect);
-                return;
             }
-
-            ChangeWallet(wallet);
-            Settings.Default.LastWalletPath = walletPath;
-            Settings.Default.Save();
 
             Task.Run(() =>
             {
-                DateTime icoTime = new DateTime(2017, 10, 7, 8, 28, 0);
+                DateTime icoTime = new DateTime(2017, 10, 7, 9, 28, 0);
                 while (true) {
                     if (DateTime.Now >= icoTime)
                     {

@@ -76,7 +76,7 @@ namespace Neo.UI
                 sw.Flush();
                 sw.Close();
             }
-            catch (Exception e)
+            catch
             {
                 Console.WriteLine("Exception writing tx to file");
             }
