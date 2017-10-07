@@ -8,7 +8,7 @@ RESTART_CMD = os.getcwd()+'/scripts/commands/restart_sync'
 def restart():
     print("!! PROCESSING RESTART !!")
     sleep(2)
-    sys_run['sh', 'scripts/git_restart.sh']
+    sys_run(['sh', 'scripts/git_restart.sh'])
     print("!! RESTARTING !!")
     os.execl(sys.executable, 'python', __file__, *sys.argv[1:])
 
