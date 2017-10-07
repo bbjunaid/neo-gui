@@ -41,3 +41,7 @@ TODO
 ===
 - restart neo-gui binary
 - run a manual clicker version for RPX
+
+TROUBLESHOOTING
+===
+- if ./git_head.sh shows no hash, try dos2unix git_head.sh
