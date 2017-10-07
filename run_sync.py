@@ -7,7 +7,7 @@ RESTART_CMD = os.getcwd()+'/scripts/commands/restart_sync'
 
 def test_restart():
     print("restart")
-    os.execl(sys.executable, 'python', __file__, *sys.argv[1:])
+    os.execv(sys.executable, [sys.executable] + sys.argv)
 
 def restart():
     print("!! Syncer Restart Command SEEN !!")
