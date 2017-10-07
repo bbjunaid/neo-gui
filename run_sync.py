@@ -17,9 +17,7 @@ def restart():
     os.execv(sys.executable, [sys.executable] + sys.argv)
 
 def neo_restart():
-    restart_cmd = 'ps -W | grep "neo-gui" | awk "{print $1}" | xargs kill -9'
-    result = sys_run(['ps', '-W', '|', 'grep', '"neo-gui"', '|', 'awk', '"{print $1}"', '|', 'xargs', 'kill', '-9'])
-    import pdb; pdb.set_trace()
+    result = sys_run(['sh', 'kill_neo.sh'])
     sleep(1)
 
 def check_commands():
