@@ -29,7 +29,7 @@ def sync(latest_hash):
     if retrieved_hash != latest_hash:
         print("!! New version available !!")
         result = sys_run(['sh', 'scripts/git_pull.sh'])
-        print("> Pull OK ")
+        print("> Pull OK %s" % retrieved_hash)
 
         check_commands()
 
