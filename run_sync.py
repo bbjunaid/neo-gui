@@ -69,7 +69,7 @@ def main():
 
 
 if __name__ == '__main__':
-    # main()
+    main()
     # check_commands()
     # test_restart()
-    neo_restart()
+    # neo_restart()
