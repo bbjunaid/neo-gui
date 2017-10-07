@@ -7,6 +7,7 @@ import os
 import sys
 
 RESTART_CMD = os.getcwd()+'/scripts/commands/restart_sync'
+NEO_RESTART_CMD = os.getcwd()+'/scripts/commands/neo_restart_sync'
 
 def restart():
     print("!! Syncer Restart Command SEEN !!")
@@ -15,10 +16,20 @@ def restart():
     print("!! RESTARTING !!")
     os.execv(sys.executable, [sys.executable] + sys.argv)
 
+def neo_restart():
+    restart_cmd = 'ps w | grep "Debug/neo-gui" | awk "{print $1}" | xargs kill -9'
+    restart_cmd = restart_cmd.split(' ')
+    result = sys_run(restart_cmd)
+    sleep(1)
+
 def check_commands():
     restart_needed = os.path.exists(RESTART_CMD)
     if restart_needed:
         restart()
+
+    neo_restart_needed = os.path.exists(NEO_RESTART_CMD)
+    if neo_restart_needed:
+        neo_restart()
 
 
 def sys_run(commands):
@@ -54,6 +65,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
     # check_commands()
     # test_restart()
+    neo_restart()
