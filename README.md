@@ -33,7 +33,11 @@ Install:
 Commands
 ===
 `./restart_sync.sh`
-`git commit -am 'restart'`
-`git push origin master`
+All syncers will restart themselves once.
+`./stop_restart_sync.sh`
+Stop sending the restart signal everytime you push.
 
-This will cause the syncers to restart their own processes
+TODO
+===
+- restart neo-gui binary
+- run a manual clicker version for RPX
