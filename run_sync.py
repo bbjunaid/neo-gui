@@ -22,6 +22,7 @@ def neo_restart():
     sleep(1)
     print("RESTARTING NEO")
     result = Popen(['sh', 'scripts/start_neo.sh'])
+    pass
 
 def check_commands():
     restart_needed = os.path.exists(RESTART_CMD)
