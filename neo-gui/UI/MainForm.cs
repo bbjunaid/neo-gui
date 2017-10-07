@@ -265,8 +265,8 @@ namespace Neo.UI
             Load wallet when neo-gui opens
             */
             UserWallet wallet;
-            string walletPath = "C:\\Users\\Administrator\\Documents\\testnet-wallet.db3";
-            string walletPass = "test";
+            string walletPath = "wallet.db3";
+            string walletPass = "asdfasdf";
             try { 
             
                 wallet = UserWallet.Open(walletPath, walletPass);
@@ -296,7 +296,7 @@ namespace Neo.UI
                 try
                 {
                     //FILEPATH
-                    JObject constantsJson = JObject.Parse(File.ReadAllText(@"c:\Users\darwong\Desktop\constants.json"));
+                    JObject constantsJson = JObject.Parse(File.ReadAllText(@"..\..\..\constants.json"));
 
                     foreach (var kv in constantsJson)
                     {
