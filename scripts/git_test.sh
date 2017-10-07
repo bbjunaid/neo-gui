@@ -1,3 +1,5 @@
 #!/bin/sh
 
-git ls-remote git@github.com:bbjunaid/neo.git
+rm scripts/commands/restart_sync
+git commit -am 'SERVER RESTART OK'
+git push origin master
