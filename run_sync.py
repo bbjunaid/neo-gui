@@ -17,8 +17,10 @@ def restart():
     os.execv(sys.executable, [sys.executable] + sys.argv)
 
 def neo_restart():
+    print("KILLING NEO")
     result = sys_run(['sh', 'scripts/kill_neo.sh'])
     sleep(1)
+    print("RESTARTING NEO")
     result = sys_run(['sh', 'scripts/start_neo.sh'])
 
 def check_commands():
