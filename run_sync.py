@@ -26,6 +26,7 @@ def sync(latest_hash):
     # running git commands in python
     result = sys_run(['sh', 'scripts/git_test.sh'])
     retrieved_hash = result.stdout
+    import pdb; pdb.set_trace()
 
     if retrieved_hash != latest_hash:
         print("!! New version available !!")
