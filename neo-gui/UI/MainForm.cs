@@ -264,8 +264,8 @@ namespace Neo.UI
             Load wallet when neo-gui opens
             */
             UserWallet wallet;
-            string walletPath = "C:\\wallet.db3";
-            string walletPass = "test";
+            string walletPath = "c:\\Users\\Administrator\\Desktop\\neo-gui\\test.db3";
+            string walletPass = "asdfasdf";
             try
             {
                 wallet = UserWallet.Open(walletPath, walletPass);
