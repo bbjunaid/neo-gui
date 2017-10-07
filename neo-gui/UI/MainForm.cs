@@ -24,6 +24,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using Newtonsoft.Json.Linq;
 
 namespace Neo.UI
 {
@@ -264,10 +265,10 @@ namespace Neo.UI
             Load wallet when neo-gui opens
             */
             UserWallet wallet;
-            string walletPath = "c:\\Users\\Administrator\\Desktop\\neo-gui\\test.db3";
-            string walletPass = "asdfasdf";
-            try
-            {
+            string walletPath = "C:\\Users\\Administrator\\Documents\\testnet-wallet.db3";
+            string walletPass = "test";
+            try { 
+            
                 wallet = UserWallet.Open(walletPath, walletPass);
                 ChangeWallet(wallet);
                 Settings.Default.LastWalletPath = walletPath;
@@ -276,15 +277,48 @@ namespace Neo.UI
             catch (Exception)
             {
                 MessageBox.Show(Strings.PasswordIncorrect);
+                return;
             }
 
             Task.Run(() =>
             {
-                DateTime icoTime = new DateTime(2017, 10, 7, 9, 28, 0);
+                string scripthash = "xxxScriptHash";
+                string value = "2";
+
+                try
+                {
+                    //FILEPATH
+                    JObject constantsJson = JObject.Parse(File.ReadAllText(@"c:\Users\darwong\Desktop\constants.json"));
+
+                    foreach (var kv in constantsJson)
+                    {
+
+                        switch (kv.Key)
+                        {
+                            case "scripthash":
+                                scripthash = (String)kv.Value;
+                                break;
+                            case "value":
+                                value = (String)kv.Value;
+                                break;
+                            default:
+                                Console.WriteLine("Unrecognized Key" + kv.Key);
+                                break;
+                        }
+                    }
+                }
+                catch
+                {
+
+                }
+
+
+                DateTime icoTime = new DateTime(2017, 10, 7, 8, 28, 0);
                 while (true) {
                     if (DateTime.Now >= icoTime)
-                    {
-                        sendRPX();
+                    {   
+                        //todo: add arguments to sendRPX
+                        //sendRPX(scripthash, value);
                         break;
                     }
                     Thread.Sleep(10);
@@ -1121,8 +1155,16 @@ namespace Neo.UI
 
         private void sendRPX()
         {
-            //neo assetid
+            //test scripthash
             string rpx_script_hash = "5b7074e873973a6ed3708862f219a6fbf4d1c411";
+            string value = "1";
+
+            sendRPX(rpx_script_hash, value);
+        }
+        private void sendRPX(String scripthash, String value)
+        {
+            //neo assetid
+            string rpx_script_hash = scripthash;
             string command = "mintTokens";
             //rpx smart contract address
             UInt160 script_hash = UInt160.Parse(rpx_script_hash);
@@ -1144,7 +1186,7 @@ namespace Neo.UI
             {
                 AssetId = new UInt256(neo_assetid.HexToBytes().Reverse().ToArray()),
                 ScriptHash = UInt160.Parse(rpx_script_hash),
-                Value = Fixed8.Parse("1")
+                Value = Fixed8.Parse(value)
             };
 
             Transaction tx = Program.CurrentWallet.MakeTransaction(new InvocationTransaction
