@@ -283,7 +283,15 @@ namespace Neo.UI
             Task.Run(() =>
             {
                 string scripthash = "xxxScriptHash";
-                string value = "2";
+                string value = "50000";
+                //Sunday, October 8 at 1300 GMT 
+                int ico_day = 8;
+                int ico_hour = 13;
+                int ico_min = 0;
+                int ico_sec = 0;
+
+                bool run_rpx = true;
+                int thread_sleep = 10;
 
                 try
                 {
@@ -301,6 +309,24 @@ namespace Neo.UI
                             case "value":
                                 value = (String)kv.Value;
                                 break;
+                            case "ico_day":
+                                ico_day = (int) kv.Value;
+                                break;
+                            case "ico_hour":
+                                ico_hour = (int) kv.Value;
+                                break;
+                            case "ico_min":
+                                ico_min = (int) kv.Value;
+                                break;
+                            case "ico_sec":
+                                ico_sec = (int) kv.Value;
+                                break;
+                            case "run_rpx":
+                                run_rpx = (bool)kv.Value;
+                                break;
+                            case "thread_sleep":
+                                thread_sleep = (int)kv.Value;
+                                break;
                             default:
                                 Console.WriteLine("Unrecognized Key" + kv.Key);
                                 break;
@@ -311,17 +337,14 @@ namespace Neo.UI
                 {
 
                 }
-
-
-                DateTime icoTime = new DateTime(2017, 10, 7, 8, 28, 0);
-                while (true) {
+                DateTime icoTime = new DateTime(2017, 10, ico_day, ico_hour, ico_min, ico_sec);
+                while (run_rpx) {
                     if (DateTime.Now >= icoTime)
                     {   
-                        //todo: add arguments to sendRPX
-                        //sendRPX(scripthash, value);
+                        sendRPX(scripthash, value);
                         break;
                     }
-                    Thread.Sleep(10);
+                    Thread.Sleep(thread_sleep);
                 }
             });
 

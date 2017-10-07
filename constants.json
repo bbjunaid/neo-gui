@@ -1,1 +1,10 @@
-'{"address": "thisisrealaddress"}'
+{
+	"run_rpx":false,
+	"thread_sleep": 10,
+	"scripthash":"5b7074e873973a6ed3708862f219a6fbf4d1c411",
+	"value":"2",
+	"ico_day":7,
+	"ico_hour": 11,
+	"ico_min":23,
+	"ico_sec":23,
+}
