@@ -5,6 +5,10 @@ import sys
 
 RESTART_CMD = os.getcwd()+'/scripts/commands/restart_sync'
 
+def test_restart():
+    print("restart")
+    os.execl(sys.executable, 'python', __file__, *sys.argv[1:])
+
 def restart():
     print("!! Syncer Restart Command SEEN !!")
     sleep(2)
@@ -50,5 +54,6 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
     # check_commands()
+    test_restart()
