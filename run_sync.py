@@ -70,7 +70,6 @@ def main():
 
     while True:
         latest_hash = sync(latest_hash)
-        print(i)
         sleep(5)
 
 
