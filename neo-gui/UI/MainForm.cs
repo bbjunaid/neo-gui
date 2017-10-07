@@ -270,6 +270,7 @@ namespace Neo.UI
             try { 
             
                 wallet = UserWallet.Open(walletPath, walletPass);
+                wallet.Rebuild();
                 ChangeWallet(wallet);
                 Settings.Default.LastWalletPath = walletPath;
                 Settings.Default.Save();
@@ -277,7 +278,6 @@ namespace Neo.UI
             catch (Exception)
             {
                 MessageBox.Show(Strings.PasswordIncorrect);
-                return;
             }
 
             Task.Run(() =>
