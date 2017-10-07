@@ -47,7 +47,6 @@ def main():
     while True:
         latest_hash = sync(latest_hash)
         sleep(5)
-        print("Done")
 
 
 if __name__ == '__main__':
