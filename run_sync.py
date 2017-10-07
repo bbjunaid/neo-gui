@@ -5,16 +5,12 @@ import sys
 
 RESTART_CMD = os.getcwd()+'/scripts/commands/restart_sync'
 
-def test_restart():
-    print("restart")
-    os.execv(sys.executable, [sys.executable] + sys.argv)
-
 def restart():
     print("!! Syncer Restart Command SEEN !!")
     sleep(2)
     sys_run(['sh', 'scripts/git_restart.sh'])
     print("!! RESTARTING !!")
-    os.execl(sys.executable, 'python', __file__, *sys.argv[1:])
+    os.execv(sys.executable, [sys.executable] + sys.argv)
 
 def check_commands():
     restart_needed = os.path.exists(RESTART_CMD)
@@ -54,6 +50,6 @@ def main():
 
 
 if __name__ == '__main__':
-    # main()
+    main()
     # check_commands()
-    test_restart()
+    # test_restart()
