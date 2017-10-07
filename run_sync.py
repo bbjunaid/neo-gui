@@ -17,7 +17,7 @@ def restart():
     os.execv(sys.executable, [sys.executable] + sys.argv)
 
 def neo_restart():
-    restart_cmd = 'ps w | grep "Debug/neo-gui" | awk "{print $1}" | xargs kill -9'
+    restart_cmd = 'ps -W | grep "neo-gui" | awk "{print $1}" | xargs kill -9'
     restart_cmd = restart_cmd.split(' ')
     result = sys_run(restart_cmd)
     sleep(1)
