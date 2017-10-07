@@ -28,4 +28,12 @@ Install:
 - cygwin git, wget, curl, python
 
 
-- `python run_sync.py`
+`python run_sync.py`
+
+Commands
+===
+`./restart_sync.sh`
+`git commit -am 'restart'`
+`git push origin master`
+
+This will cause the syncers to restart their own processes

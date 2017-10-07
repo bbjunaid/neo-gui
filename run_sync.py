@@ -6,7 +6,7 @@ import sys
 RESTART_CMD = os.getcwd()+'/scripts/commands/restart_sync'
 
 def restart():
-    print("!! PROCESSING RESTART !!")
+    print("!! Syncer Restart Command SEEN !!")
     sleep(2)
     sys_run(['sh', 'scripts/git_restart.sh'])
     print("!! RESTARTING !!")
