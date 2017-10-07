@@ -26,13 +26,13 @@ def neo_restart():
     pass
 
 def check_commands():
-    restart_needed = os.path.exists(RESTART_CMD)
-    if restart_needed:
-        restart()
-
     neo_restart_needed = os.path.exists(NEO_RESTART_CMD)
     if neo_restart_needed:
         neo_restart()
+
+    restart_needed = os.path.exists(RESTART_CMD)
+    if restart_needed:
+        restart()
 
 
 def sys_run(commands):
