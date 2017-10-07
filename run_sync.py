@@ -68,10 +68,8 @@ def main():
     result = sys_run(['sh', 'scripts/git_head.sh'])
     latest_hash  = result.stdout.strip()
 
-    i =0
     while True:
         latest_hash = sync(latest_hash)
-        i += 1
         print(i)
         sleep(5)
 
