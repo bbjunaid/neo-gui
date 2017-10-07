@@ -35,6 +35,8 @@ def check_commands():
     if restart_needed:
         restart()
 
+    #
+
 
 def sys_run(commands):
     result = run(commands, stdout=PIPE, stderr=PIPE)
