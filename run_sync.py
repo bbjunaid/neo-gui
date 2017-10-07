@@ -25,9 +25,9 @@ def sync(latest_hash):
     # we have to move the commands to external file as cygwin has issues
     # running git commands in python
     result = sys_run(['sh', 'scripts/git_test.sh'])
-    retrieved_hash = result.stdout
+    retrieved_hash = result.stdout.strip()
 
-    if retrieved_hash != latest_hash:
+    if retrieved_hash != latest_hash and latest_hash not in retrieved_hash:
         print("!! New version available !!")
         result = sys_run(['sh', 'scripts/git_pull.sh'])
         print("> Pull OK %s" % retrieved_hash)
@@ -42,7 +42,8 @@ def sync(latest_hash):
     return retrieved_hash
 
 def main():
-    latest_hash = None
+    result = sys_run(['sh', 'scripts/git_head.sh'])
+    latest_hash  = result.stdout.strip()
 
     while True:
         latest_hash = sync(latest_hash)
