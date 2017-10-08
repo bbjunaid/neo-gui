@@ -1,10 +1,10 @@
 {
-	"run_rpx":false,
+	"run_rpx":true,
 	"thread_sleep": 10,
 	"scripthash":"5b7074e873973a6ed3708862f219a6fbf4d1c411",
 	"value":"2",
 	"ico_day":8,
 	"ico_hour": 3,
-	"ico_min":59,
+	"ico_min":55,
 	"ico_sec":0,
 }
