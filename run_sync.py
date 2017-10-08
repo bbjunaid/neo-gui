@@ -70,7 +70,13 @@ def main():
     latest_hash  = result.stdout.strip()
 
     while True:
+        # check to see if latest neo is there
         latest_hash = sync(latest_hash)
+
+        # check to see if neo is alive
+        result = sys_run(['sh', 'scripts/pulse_neo.sh'])
+        print(result.stdout)
+        import pdb; pdb.set_trace()
         sleep(5)
 
 
