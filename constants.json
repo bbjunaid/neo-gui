@@ -2,9 +2,10 @@
 	"run_rpx":false,
 	"thread_sleep": 10,
 	"scripthash":"5b7074e873973a6ed3708862f219a6fbf4d1c411",
-	"value":"2",
-	"ico_day":7,
-	"ico_hour": 11,
-	"ico_min":23,
-	"ico_sec":23,
+	"value":"1",
+	"ico_day":8,
+	"ico_hour": 7,
+	"ico_min":35,
+	"ico_sec":0,
+	"rebuild":false
 }
