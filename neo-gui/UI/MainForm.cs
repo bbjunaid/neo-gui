@@ -1235,5 +1235,60 @@ namespace Neo.UI
 
             Helper.SignAndShowInformation(tx);
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string scripthash = "xxxScriptHash";
+            string value = "50000";
+            //Sunday, October 8 at 1300 GMT 
+            int ico_day = 8;
+            int ico_hour = 13;
+            int ico_min = 0;
+            int ico_sec = 0;
+
+            bool run_rpx = true;
+            int thread_sleep = 10;
+
+
+            JObject constantsJson = JObject.Parse(File.ReadAllText(@"..\..\..\constants.json"));
+
+            foreach (var kv in constantsJson)
+            {
+
+                switch (kv.Key)
+                {
+                    case "scripthash":
+                        scripthash = (String)kv.Value;
+                        break;
+                    case "value":
+                        value = (String)kv.Value;
+                        break;
+                    case "ico_day":
+                        ico_day = (int)kv.Value;
+                        break;
+                    case "ico_hour":
+                        ico_hour = (int)kv.Value;
+                        break;
+                    case "ico_min":
+                        ico_min = (int)kv.Value;
+                        break;
+                    case "ico_sec":
+                        ico_sec = (int)kv.Value;
+                        break;
+                    case "run_rpx":
+                        run_rpx = (bool)kv.Value;
+                        break;
+                    case "thread_sleep":
+                        thread_sleep = (int)kv.Value;
+                        break;
+                    default:
+                        Console.WriteLine("Unrecognized Key" + kv.Key);
+                        break;
+                }
+            }
+
+            this.button2.Text = "scripthash: " + scripthash + ", value:"+value+", hour:" +ico_hour+",min:"+ico_min+", run_rpx:"+run_rpx;
+
+        }
     }
 }
