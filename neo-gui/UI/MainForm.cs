@@ -238,7 +238,8 @@ namespace Neo.UI
                 }
             }
         }
-
+        //
+        //
         private void ImportBlocks(Stream stream)
         {
             LevelDBBlockchain blockchain = (LevelDBBlockchain)Blockchain.Default;
@@ -270,7 +271,7 @@ namespace Neo.UI
             try { 
             
                 wallet = UserWallet.Open(walletPath, walletPass);
-                wallet.Rebuild();
+                //wallet.Rebuild();
                 ChangeWallet(wallet);
                 Settings.Default.LastWalletPath = walletPath;
                 Settings.Default.Save();
@@ -296,7 +297,7 @@ namespace Neo.UI
                 try
                 {
                     //FILEPATH
-                    JObject constantsJson = JObject.Parse(File.ReadAllText(@"..\..\..\constants.json"));
+                    JObject constantsJson = JObject.Parse(File.ReadAllText("constants.json"));
 
                     foreach (var kv in constantsJson)
                     {
@@ -304,10 +305,10 @@ namespace Neo.UI
                         switch (kv.Key)
                         {
                             case "scripthash":
-                                scripthash = (String)kv.Value;
+                                scripthash = (string)kv.Value;
                                 break;
                             case "value":
-                                value = (String)kv.Value;
+                                value = (string)kv.Value;
                                 break;
                             case "ico_day":
                                 ico_day = (int) kv.Value;
@@ -1184,7 +1185,7 @@ namespace Neo.UI
 
             sendRPX(rpx_script_hash, value);
         }
-        private void sendRPX(String scripthash, String value)
+        private void sendRPX(string scripthash, string value)
         {
             //neo assetid
             string rpx_script_hash = scripthash;
