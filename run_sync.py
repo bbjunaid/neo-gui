@@ -75,7 +75,7 @@ def main():
 
         # check to see if neo is alive
         result = sys_run(['sh', 'scripts/pulse_neo.sh'])
-        result = result.stdout.strip()
+        result = result.stdout.strip().decode('utf-8')
 
         # if neo is dead... restart it
         if result == 0 or result == '0':
@@ -83,7 +83,6 @@ def main():
             print("RESTARTING NEO")
             result = Popen(['sh', 'scripts/start_neo.sh'])
 
-        import pdb; pdb.set_trace()
         sleep(5)
 
 
