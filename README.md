@@ -29,6 +29,7 @@ Installation
   - curl
   - unzip
 7. Install your SSH pub/priv key
+7b. Test with `ssh -T git@github.com`
 8. git clone this repo
 
 If you get permissioning issues make sure:
