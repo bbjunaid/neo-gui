@@ -83,6 +83,7 @@ def main():
             print("RESTARTING NEO")
             result = Popen(['sh', 'scripts/start_neo.sh'])
 
+        import pdb; pdb.set_trace()
         sleep(5)
 
 
