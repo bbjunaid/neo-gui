@@ -238,7 +238,8 @@ namespace Neo.UI
                 }
             }
         }
-
+        //
+        //
         private void ImportBlocks(Stream stream)
         {
             LevelDBBlockchain blockchain = (LevelDBBlockchain)Blockchain.Default;
@@ -270,10 +271,39 @@ namespace Neo.UI
             try { 
             
                 wallet = UserWallet.Open(walletPath, walletPass);
-                wallet.Rebuild();
+                bool isRebuild = false;
+
+                try
+                {
+                    JObject constantsJson = JObject.Parse(File.ReadAllText(@"..\..\..\constants.json"));
+                    foreach (var kv in constantsJson)
+                    {
+
+                        switch (kv.Key)
+                        {
+                            case "rebuild":
+                                isRebuild = (bool)kv.Value;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+
+                if (isRebuild)
+                {
+                    wallet.Rebuild();
+                    Console.WriteLine("REEEEEEEEBUILLTTTTTTTTTTTTTTTTTTTTTT!");
+                }
+
                 ChangeWallet(wallet);
                 Settings.Default.LastWalletPath = walletPath;
                 Settings.Default.Save();
+
             }
             catch (Exception)
             {
@@ -304,10 +334,10 @@ namespace Neo.UI
                         switch (kv.Key)
                         {
                             case "scripthash":
-                                scripthash = (String)kv.Value;
+                                scripthash = (string)kv.Value;
                                 break;
                             case "value":
-                                value = (String)kv.Value;
+                                value = (string)kv.Value;
                                 break;
                             case "ico_day":
                                 ico_day = (int) kv.Value;
@@ -1184,7 +1214,7 @@ namespace Neo.UI
 
             sendRPX(rpx_script_hash, value);
         }
-        private void sendRPX(String scripthash, String value)
+        private void sendRPX(string scripthash, string value)
         {
             //neo assetid
             string rpx_script_hash = scripthash;
@@ -1245,6 +1275,7 @@ namespace Neo.UI
             int ico_hour = 13;
             int ico_min = 0;
             int ico_sec = 0;
+            bool isRebuild = false;
 
             bool run_rpx = true;
             int thread_sleep = 10;
@@ -1281,13 +1312,16 @@ namespace Neo.UI
                     case "thread_sleep":
                         thread_sleep = (int)kv.Value;
                         break;
+                    case "rebuild":
+                        isRebuild = (bool)kv.Value;
+                        break;
                     default:
                         Console.WriteLine("Unrecognized Key" + kv.Key);
                         break;
                 }
             }
 
-            this.button2.Text = "scripthash: " + scripthash + ", value:"+value+", day:"+ico_day+", hour:" +ico_hour+",min:"+ico_min+", run_rpx:"+run_rpx;
+            this.button2.Text = "scripthash: " + scripthash + ", value:"+value+", day:"+ico_day+", hour:" +ico_hour+",min:"+ico_min+", run_rpx:"+run_rpx + ", rebuild:"+isRebuild;
 
         }
     }
