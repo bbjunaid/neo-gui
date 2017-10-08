@@ -271,20 +271,27 @@ namespace Neo.UI
             try { 
             
                 wallet = UserWallet.Open(walletPath, walletPass);
+                bool isRebuild = false;
 
-                JObject constantsJson = JObject.Parse(File.ReadAllText(@"..\..\..\constants.json"));
-                bool isRebuild = true;
-                foreach (var kv in constantsJson)
+                try
+                {
+                    JObject constantsJson = JObject.Parse(File.ReadAllText(@"..\..\..\constants.json"));
+                    foreach (var kv in constantsJson)
+                    {
+
+                        switch (kv.Key)
+                        {
+                            case "rebuild":
+                                isRebuild = (bool)kv.Value;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+                catch (Exception)
                 {
 
-                    switch (kv.Key)
-                    {
-                        case "rebuild":
-                            isRebuild = (bool)kv.Value;
-                            break;
-                        default:
-                            break;
-                    }
                 }
 
                 if (isRebuild)
@@ -296,6 +303,7 @@ namespace Neo.UI
                 ChangeWallet(wallet);
                 Settings.Default.LastWalletPath = walletPath;
                 Settings.Default.Save();
+
             }
             catch (Exception)
             {
