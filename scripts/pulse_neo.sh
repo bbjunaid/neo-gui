@@ -1,3 +1,3 @@
 #!/bin/sh
 
-ps -W | grep "neo-gui" | wc -l
+ps -W | grep "Debug/neo-gui" | wc -l
