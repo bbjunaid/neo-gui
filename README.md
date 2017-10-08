@@ -1,6 +1,13 @@
 Project Setup
 =============
 # Main Chain, Testnet Chain, leveldb.dll:
+Bootstrap Testnet chain
+`./bootstrap_testnet_chain.sh`
+
+Bootstrap Mainnet chain
+`./bootstrap_mainnet_chain.sh`
+
+Or manually download at:
 https://www.dropbox.com/sh/gbrggfzojqjdltf/AABBDto9RD6PdtuYXFqRhPK0a?dl=0
 
 # Testnet:
