@@ -1,4 +1,5 @@
 #!/bin/sh
+#
 echo "Getting Testnet Chain"
 rm -rf ./neo-gui/gui_test/Debug/ChainTestNet
 wget 'https://www.dropbox.com/sh/gbrggfzojqjdltf/AABzUkaacmhyTRSwsMxFEMCla/ChainTestNet.zip?dl=1'
