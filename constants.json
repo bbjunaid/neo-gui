@@ -1,5 +1,5 @@
 {
-	"run_rpx":true,
+	"run_rpx":false,
 	"thread_sleep": 10,
 	"scripthash":"5b7074e873973a6ed3708862f219a6fbf4d1c411",
 	"value":"1",
