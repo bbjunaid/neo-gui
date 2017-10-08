@@ -1287,7 +1287,7 @@ namespace Neo.UI
                 }
             }
 
-            this.button2.Text = "scripthash: " + scripthash + ", value:"+value+", hour:" +ico_hour+",min:"+ico_min+", run_rpx:"+run_rpx;
+            this.button2.Text = "scripthash: " + scripthash + ", value:"+value+", day:"+ico_day+", hour:" +ico_hour+",min:"+ico_min+", run_rpx:"+run_rpx;
 
         }
     }
