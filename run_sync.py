@@ -78,7 +78,7 @@ def main():
         result = result.stdout.strip()
 
         # if neo is dead... restart it
-        if result == 0:
+        if result == 0 or result == '0':
             print("!! NEO IS DEAD !! RESTARTING")
             print("RESTARTING NEO")
             result = Popen(['sh', 'scripts/start_neo.sh'])
