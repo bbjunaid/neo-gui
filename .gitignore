@@ -255,3 +255,4 @@ PublishProfiles
 Chain
 ChainTestNet
 Chain.zip
+neo-gui/bin/Release/wallet.db3
